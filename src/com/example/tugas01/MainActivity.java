@@ -43,8 +43,6 @@ public class MainActivity extends Activity {
         
         lv = (ListView) findViewById(R.id.list);
         btambah = (Button) findViewById(R.id.bttambah);
- 
-        new GetContacts().execute();
         
         lv.setOnItemClickListener(new OnItemClickListener() {
 			
@@ -52,8 +50,9 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
 				HashMap<String, String> hm = contactList.get(position);
-				Intent intent = new Intent(MainActivity.this, ContactDetail.class);
+				Intent intent = new Intent(MainActivity.this, ContactPesan.class);
 				intent.putExtra("id", hm.get("id"));
+				intent.putExtra("name", hm.get("name"));
 				startActivity(intent);
 			}
 		});
@@ -169,5 +168,11 @@ public class MainActivity extends Activity {
  
             lv.setAdapter(adapter);
         }
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	new GetContacts().execute();
     }
 }
